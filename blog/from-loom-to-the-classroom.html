@@ -21,7 +21,9 @@
 <body>
 
 
-    <!-- Navigation -->
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
 
     <header>
 
@@ -48,14 +50,19 @@
     </header>
 
 
-    <!-- Article -->
+
+    <!-- =========================
+         ARTICLE
+         ========================= -->
 
     <main class="container">
 
         <article class="blog-article">
 
 
-            <!-- Article title -->
+            <!-- =========================
+                 ARTICLE HEADER
+                 ========================= -->
 
             <header class="article-header">
 
@@ -72,7 +79,10 @@
             </header>
 
 
-            <!-- Opening -->
+
+            <!-- =========================
+                 OPENING
+                 ========================= -->
 
             <section class="article-section">
 
@@ -95,7 +105,10 @@
             </section>
 
 
-            <!-- Research context -->
+
+            <!-- =========================
+                 RESEARCH CONTEXT
+                 ========================= -->
 
             <section class="article-section">
 
@@ -116,14 +129,17 @@
                     over-reliance of neuropsychological assessment
                     methods on reading and writing-based tasks. Yet
                     these individuals may be highly engaged in
-                    creatively challenging occupational spheres, as
-                    is often the case with craftspeople.
+                    creatively challenging occupational spheres,
+                    as is often the case with craftspeople.
                 </p>
 
             </section>
 
 
-            <!-- Trying the loom -->
+
+            <!-- =========================
+                 TRYING THE LOOM
+                 ========================= -->
 
             <section class="article-section">
 
@@ -132,11 +148,12 @@
                     friendly master weaver and textile designer,
                     explained to us how the loom works, and
                     enthusiastically encouraged our team to give it
-                    a try as well, on a simple two-pedal, two-frame
-                    loom. (Let's just say, if O*'s threads were like
-                    agile snakes, mine were rather clumsy and
-                    uncoordinated in comparison). Here is a small interactive simulation explaining
-                    the operations of a two-pedal, two-frame loom:
+                    a try as well, on a simple two-pedal,
+                    two-frame loom. (Let's just say, if O*'s threads
+                    were like agile snakes, mine were rather clumsy
+                    and uncoordinated in comparison). Here is a small
+                    interactive simulation explaining the operations
+                    of a two-pedal, two-frame loom:
                 </p>
 
 
@@ -151,10 +168,11 @@
                     pedals and a handle called a <em>beater</em> to
                     move the weft shuttle. After 8 weft cycles, the
                     simulation stops. Congratulations — you have
-                    completed weaving your virtual cloth! You can click the 
-                    blue <strong>“Reset”</strong>
-                    button to start over.
+                    completed weaving your virtual cloth! You can
+                    click the blue <strong>“Reset”</strong> button
+                    to start over.
                 </p>
+
 
 
                 <!-- Interactive simulation -->
@@ -171,42 +189,189 @@
             </section>
 
 
-            <!-- Discovering the weaving draft -->
+
+            <!-- =========================
+                 DISCOVERING THE WEAVING DRAFT
+                 ========================= -->
+
+            <section class="article-section">
+
+                <p>
+                    Struggling with executing the correct sequence of
+                    movements, I asked S*, “When the loom is more
+                    complicated, with multiple pedals and frames, how
+                    do you keep track of the sequence of movements?”
+                    “We use this weaving draft,” he said, and produced
+                    a paper with a colourful grid from his shirt
+                    pocket. He explained that the loom is configured
+                    according to the instructions in this draft, and
+                    the sequence of movements is defined accordingly
+                    to arrive at the final design of the cloth.
+                    Basically, it is an abstract notation system for
+                    weaving. In the following section, I shall explain
+                    how weaving drafts work through a toy example
+                    which corresponds to the above simulation with
+                    2 pedals and frames each with eight warps and
+                    weft cycles:
+                </p>
+
+
+
+                <!-- Weaving draft image -->
+
+                <figure class="blog-figure">
+
+                    <img
+                        src="../assets/images/weaving_draft.png"
+                        alt="Toy weaving draft showing threading, tie-up, treadling and drawdown">
+
+                    <figcaption>
+                        A toy weaving draft corresponding to the
+                        two-pedal, two-frame loom simulation.
+                    </figcaption>
+
+                </figure>
+
+            </section>
+
+
+
+            <!-- =========================
+                 READING THE WEAVING DRAFT
+                 ========================= -->
 
             <section class="article-section">
 
 
                 <p>
-                   
-    Struggling with executing the correct sequence of movements,
-    I asked S*, “When the loom is more complicated, with multiple
-    pedals and frames, how do you keep track of the sequence of
-    movements?” “We use this weaving draft,” he said, and produced
-    a paper with a colourful grid from his shirt pocket. He explained
-    that the loom is configured according to the instructions in
-    this draft, and the sequence of movements is defined accordingly
-    to arrive at the final design of the cloth. Basically, it is an
-    abstract notation system for weaving. In the following section, 
-    I shall explain how weaving drafts work through a toy example
-    which corresponds to the above simulation with 2 pedals and frames
-    each with eight warps and weft cycles: 
-
+                    <strong>
+                        1) Threading (2 frames × 8 warps)
+                    </strong> —
+                    In the threading matrix (uppermost, left), the two
+                    rows represent the two frames of the loom, while
+                    the eight columns represent each warp thread.
+                    Each warp thread can only be attached to one frame.
+                    The black point denotes which frame that particular
+                    thread is connected to.
                 </p>
 
-    <figure class="blog-figure">
 
-    <img
-        src="../assets/images/weaving_draft.png"
-        alt="Toy weaving draft showing threading, tie-up, treadling and drawdown">
+                <p>
+                    <strong>
+                        2) Tie-up (2 frames × 2 pedals)
+                    </strong> —
+                    In the tie-up matrix (top-right), the two columns
+                    represent the pedals, while the two rows represent
+                    the shafts/frames. For example, the first pedal is
+                    attached to the first frame. When the first pedal
+                    is pressed, the first frame and the corresponding
+                    warp threads connected to it are raised.
+                </p>
 
-    <figcaption>
-        A toy weaving draft corresponding to the two-pedal,
-        two-frame loom simulation.
-    </figcaption>
 
-</figure>
+                <p>
+                    <strong>
+                        3) Treadling (8 weft cycles × 2 pedals)
+                    </strong> —
+                    The treadling matrix is shown below the tie-up.
+                    The eight rows here refer to the eight weft
+                    sequences, while the two columns represent which
+                    pedal is pressed during each weft sequence.
+                </p>
+
+
+                <p>
+                    <strong>
+                        4) Drawdown (8 warps × 8 weft cycles)
+                    </strong> —
+                    The final drawdown is the grid in the middle that
+                    represents the interlacement pattern of the
+                    resulting fabric.
+                </p>
+
+
+                <p>
+                    You can try to replay the simulation again and
+                    refer to the weaving draft to see how pedal presses
+                    control frames, which determine which warps are
+                    lifted at each pedal press, and how each weft cycle
+                    passes through the warp to create the final
+                    interlacement pattern depicted in the drawdown.
+                </p>
 
             </section>
+
+
+
+            <!-- =========================
+                 FROM WEAVING TO MATRICES
+                 ========================= -->
+
+            <section class="article-section">
+
+                <p>
+                    I figured that perhaps we could use the weaving
+                    draft patterns as stimuli for designing visual
+                    psychophysics-based experiments. However, that
+                    would require multiple drafts and drawdown patterns,
+                    and I wondered where they could be sourced from.
+                </p>
+
+
+                <p>
+                    Of course, it would be unfeasible to ask weavers
+                    to manually design hundreds of drafts for this
+                    purpose, as it would be a very time-consuming
+                    process. We needed to find some logical summary
+                    of how the warps and wefts are controlled throughout
+                    the process of pedal pressing, frame lifting, and
+                    weft interlacement, so that we could computationally
+                    generate multiple, loom-reproducible interlacement
+                    patterns.
+                </p>
+
+
+                <p>
+                    As I racked my rather mathematically-challenged
+                    brain, a talk on YouTube titled
+                    <em>
+                        “It's Just Matrix Multiplication:
+                        Notation for Weaving”
+                    </em>
+                    by Dr. Lea Albaugh at the Strange Loops conference
+                    came to the rescue.
+                </p>
+
+
+                <p>
+                    She very succinctly explained how the process of
+                    determining different configurations of the loom —
+                    involving threading, tie-up, and treadling — can be
+                    represented using binary matrices. Multiplying these
+                    matrices results in another binary matrix which,
+                    when converted into its graphical representation,
+                    produces the drawdown of the final weaving draft
+                    and, ultimately, the design of the cloth.
+                </p>
+
+
+                <p>
+                    The equation for generating the weaving draft
+                    drawdown is:
+                </p>
+
+
+                <!-- Equation -->
+
+                <div class="equation">
+
+                    Drawdown =
+                    Treadling × Tie-up<sup>T</sup> × Threading
+
+                </div>
+
+            </section>
+
 
 
         </article>
@@ -214,7 +379,10 @@
     </main>
 
 
-    <!-- Footer -->
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
 
     <footer>
 
