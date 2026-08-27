@@ -312,8 +312,9 @@ footer {
 .equation {
     text-align: center;
     font-family: Georgia, "Times New Roman", serif;
-    font-size: 34px;
-    margin: 50px 0;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 35px 0;
 }
 
 /* =========================
