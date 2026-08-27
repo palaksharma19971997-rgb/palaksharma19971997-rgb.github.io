@@ -16,7 +16,9 @@ body {
     padding: 0 30px;
 }
 
-/* Header */
+/* =========================
+   HEADER
+   ========================= */
 
 header {
     border-bottom: 1px solid #ddd;
@@ -47,7 +49,9 @@ nav a:hover {
     color: #0066aa;
 }
 
-/* Main */
+/* =========================
+   MAIN
+   ========================= */
 
 main {
     padding-top: 50px;
@@ -68,7 +72,9 @@ section h2 {
     margin-bottom: 25px;
 }
 
-/* Introduction */
+/* =========================
+   INTRODUCTION
+   ========================= */
 
 .intro {
     display: flex;
@@ -97,7 +103,9 @@ section h2 {
     margin-top: 0;
 }
 
-/* Links */
+/* =========================
+   LINKS
+   ========================= */
 
 a {
     color: #0066aa;
@@ -107,7 +115,9 @@ a:hover {
     color: #004477;
 }
 
-/* CV */
+/* =========================
+   CV
+   ========================= */
 
 .cv-button {
     display: inline-block;
@@ -126,13 +136,17 @@ a:hover {
     color: white;
 }
 
-/* Academic profiles */
+/* =========================
+   ACADEMIC PROFILES
+   ========================= */
 
 .profile-links a {
     margin-right: 25px;
 }
 
-/* Blog */
+/* =========================
+   BLOG PREVIEW
+   ========================= */
 
 .blog-preview {
     border-left: 3px solid #ddd;
@@ -148,7 +162,9 @@ a:hover {
     font-size: 14px;
 }
 
-/* Footer */
+/* =========================
+   FOOTER
+   ========================= */
 
 footer {
     border-top: 1px solid #ddd;
@@ -159,36 +175,6 @@ footer {
     font-size: 14px;
 }
 
-/* Mobile */
-
-@media (max-width: 700px) {
-
-    .nav-container {
-        display: block;
-    }
-
-    nav {
-        margin-top: 15px;
-    }
-
-    nav a {
-        margin-left: 0;
-        margin-right: 15px;
-    }
-
-    .intro {
-        display: block;
-    }
-
-    .profile-image {
-        margin-bottom: 25px;
-    }
-
-    .profile-image img {
-        width: 150px;
-        height: 185px;
-    }
-}
 /* =========================
    BLOG ARTICLE
    ========================= */
@@ -216,6 +202,7 @@ footer {
     line-height: 1.2;
     font-weight: 600;
     color: #222;
+
     border: none;
     padding: 0;
     margin: 0 auto 15px auto;
@@ -250,15 +237,25 @@ footer {
     margin-bottom: 25px;
 }
 
+/* =========================
+   BLOCKQUOTES
+   ========================= */
+
 .blog-article blockquote {
     margin: 45px 30px;
     padding-left: 25px;
+
     border-left: 3px solid #ddd;
+
     font-size: 21px;
     line-height: 1.6;
     font-style: italic;
     color: #555;
 }
+
+/* =========================
+   BLOG IMAGES
+   ========================= */
 
 .article-image {
     width: 100%;
@@ -270,13 +267,47 @@ footer {
     margin: 45px 0;
 }
 
-.blog-article figcaption {
-    margin-top: 12px;
+/*
+   Regular article images
+*/
+
+.blog-article figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/*
+   Weaving draft / blog figures
+
+   Change 650px to make the image
+   larger or smaller.
+*/
+
+.blog-figure {
+    margin: 40px 0;
     text-align: center;
+}
+
+.blog-figure img {
+    width: 650px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.blog-figure figcaption {
+    margin-top: 10px;
+    color: #777;
     font-size: 14px;
     line-height: 1.5;
-    color: #777;
 }
+
+/* =========================
+   EQUATIONS
+   ========================= */
 
 .equation {
     text-align: center;
@@ -285,7 +316,60 @@ footer {
     margin: 50px 0;
 }
 
+/* =========================
+   INTERACTIVE SIMULATIONS
+   ========================= */
+
+.simulation-container {
+    width: 100%;
+    margin: 40px 0;
+
+    border: 1px solid #ddd;
+    background: #f5f5f5;
+
+    overflow: hidden;
+}
+
+.simulation-container iframe {
+    display: block;
+    width: 100%;
+    height: 700px;
+    border: none;
+}
+
+/* =========================
+   MOBILE
+   ========================= */
+
 @media (max-width: 700px) {
+
+    .nav-container {
+        display: block;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav a {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+
+    .intro {
+        display: block;
+    }
+
+    .profile-image {
+        margin-bottom: 25px;
+    }
+
+    .profile-image img {
+        width: 150px;
+        height: 185px;
+    }
+
+    /* Blog */
 
     .article-header h2 {
         font-size: 34px;
@@ -305,39 +389,11 @@ footer {
         font-size: 18px;
     }
 
-}
- /* Interactive simulations */
+    /* Blog images */
 
-.simulation-container {
-    width: 100%;
-    margin: 40px 0;
-    border: 1px solid #ddd;
-    background: #f5f5f5;
-    overflow: hidden;
-}
+    .blog-figure img {
+        width: 100%;
+        max-width: 650px;
+    }
 
-.simulation-container iframe {
-    display: block;
-    width: 100%;
-    height: 700px;
-    border: none;
 }
-.blog-figure {
-    margin: 40px 0;
-    text-align: center;
-}
-
-.blog-figure img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-.blog-figure figcaption {
-    margin-top: 10px;
-    color: #777;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
