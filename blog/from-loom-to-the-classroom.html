@@ -393,6 +393,32 @@
 
                 </figure>
 
+            <section class="article-section">
+
+    <p>
+        For our team, this meant that I could simulate multiple
+        loom-reproducible drawdowns using the above matrix
+        multiplication equation, by randomly shuffling the
+        threading, tie-up, and treadling matrices to create
+        several drawdowns.
+   
+        Certain constraints regarding the physical structure of
+        the loom had to be kept in mind, though. Mathematically,
+        the matrix multiplication may be functional, but the
+        resulting configuration may not always translate into a
+        loom-reproducible design.
+   
+        For example, one such constraint was that a single warp
+        thread cannot be attached to multiple frames. In the
+        threading matrix, this would correspond to having two
+        1s in the same column. Although such a matrix would still
+        execute the multiplication mathematically, attaching one
+        warp thread to two frames on a real loom would cause the
+        warp thread to break.
+    </p>
+
+</section>
+
 
 
         </article>
