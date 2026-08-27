@@ -1,1 +1,192 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background: white;
+    line-height: 1.7;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 30px;
+}
+
+/* Header */
+
+header {
+    border-bottom: 1px solid #ddd;
+    padding: 25px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.site-title {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 600;
+    color: #222;
+    text-decoration: none;
+}
+
+nav a {
+    margin-left: 25px;
+    color: #444;
+    text-decoration: none;
+}
+
+nav a:hover {
+    color: #0066aa;
+}
+
+/* Main */
+
+main {
+    padding-top: 50px;
+}
+
+section {
+    margin-bottom: 55px;
+}
+
+section h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+
+    border-bottom: 1px solid #ddd;
+
+    padding-bottom: 8px;
+    margin-bottom: 25px;
+}
+
+/* Introduction */
+
+.intro {
+    display: flex;
+    gap: 45px;
+    align-items: flex-start;
+    margin-bottom: 70px;
+}
+
+.profile-image img {
+    width: 180px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.intro-text h2 {
+    font-size: 32px;
+    border: none;
+    margin: 0 0 5px 0;
+    padding: 0;
+}
+
+.position {
+    font-size: 18px;
+    color: #666;
+    margin-top: 0;
+}
+
+/* Links */
+
+a {
+    color: #0066aa;
+}
+
+a:hover {
+    color: #004477;
+}
+
+/* CV */
+
+.cv-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 9px 17px;
+
+    background-color: #333;
+    color: white;
+
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+.cv-button:hover {
+    background-color: #555;
+    color: white;
+}
+
+/* Academic profiles */
+
+.profile-links a {
+    margin-right: 25px;
+}
+
+/* Blog */
+
+.blog-preview {
+    border-left: 3px solid #ddd;
+    padding-left: 20px;
+}
+
+.blog-preview h3 {
+    margin-bottom: 0;
+}
+
+.date {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Footer */
+
+footer {
+    border-top: 1px solid #ddd;
+    margin-top: 50px;
+    padding: 25px 0;
+
+    color: #777;
+    font-size: 14px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .nav-container {
+        display: block;
+    }
+
+    nav {
+        margin-top: 15px;
+    }
+
+    nav a {
+        margin-left: 0;
+        margin-right: 15px;
+    }
+
+    .intro {
+        display: block;
+    }
+
+    .profile-image {
+        margin-bottom: 25px;
+    }
+
+    .profile-image img {
+        width: 150px;
+        height: 185px;
+    }
+}
 
