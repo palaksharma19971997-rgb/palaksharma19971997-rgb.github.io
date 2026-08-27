@@ -322,4 +322,22 @@ footer {
     height: 700px;
     border: none;
 }
+.blog-figure {
+    margin: 40px 0;
+    text-align: center;
+}
+
+.blog-figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.blog-figure figcaption {
+    margin-top: 10px;
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
 
