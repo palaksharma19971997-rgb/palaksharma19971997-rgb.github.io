@@ -80,7 +80,7 @@ section h2 {
     display: flex;
     gap: 45px;
     align-items: flex-start;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
 }
 
 .profile-image img {
@@ -99,7 +99,7 @@ section h2 {
 
 .position {
     font-size: 18px;
-    color: #666;
+    color: #333;
     margin-top: 0;
 }
 
