@@ -279,10 +279,8 @@ footer {
 }
 
 /*
-   Weaving draft / blog figures
-
-   Change 650px to make the image
-   larger or smaller.
+   Regular blog figures
+   Matrix image will remain 650px
 */
 
 .blog-figure {
@@ -298,8 +296,18 @@ footer {
     margin: 0 auto;
 }
 
+/*
+   Smaller weaving draft
+*/
+
+.draft-figure img {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+}
+
 .blog-figure figcaption {
-    margin-top: 10px;
+    margin-top: 22px;
     color: #777;
     font-size: 14px;
     line-height: 1.5;
