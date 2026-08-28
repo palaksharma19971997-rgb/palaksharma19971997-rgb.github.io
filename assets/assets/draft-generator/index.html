@@ -1,1 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Interactive Weaving Draft Generator
+    </title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333;
+            background: white;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .intro {
+            max-width: 750px;
+            margin: 0 auto 35px auto;
+            text-align: center;
+            color: #666;
+        }
+
+
+        /* =========================
+           CONTROLS
+           ========================= */
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: end;
+            gap: 15px;
+
+            padding: 25px;
+
+            border: 1px solid #ddd;
+            background: #fafafa;
+
+            margin-bottom: 40px;
+        }
+
+        .control {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control label {
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .control input {
+            width: 80px;
+            padding: 8px;
+
+            border: 1px solid #bbb;
+            border-radius: 4px;
+
+            font-size: 15px;
+        }
+
+        button {
+            padding: 9px 18px;
+
+            border: none;
+            border-radius: 4px;
+
+            background: #333;
+            color: white;
+
+            font-size: 15px;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #555;
+        }
+
+
+        /* =========================
+           DRAFT
+           ========================= */
+
+        #draft-output {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .draft {
+            display: grid;
+
+            /*
+                Tie-up       Threading
+                Treadling    Drawdown
+            */
+
+            grid-template-columns:
+                max-content
+                max-content;
+
+            gap: 45px;
+
+            width: max-content;
+
+            margin: 0 auto;
+        }
+
+
+        /* =========================
+           MATRICES
+           ========================= */
+
+        .matrix-container h3 {
+            margin: 0 0 10px 0;
+
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .matrix {
+            display: grid;
+
+            width: max-content;
+
+            border-top: 1px solid #333;
+            border-left: 1px solid #333;
+        }
+
+        .cell {
+
+            width: 18px;
+            height: 18px;
+
+            background: white;
+
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+        }
+
+        .cell.filled {
+            background: #222;
+        }
+
+
+        /* Different colours help readers
+           see the role of each matrix */
+
+        .threading-cell.filled {
+            background: darkgreen;
+        }
+
+        .tieup-cell.filled {
+            background: darkred;
+        }
+
+        .treadling-cell.filled {
+            background: darkblue;
+        }
+
+        .drawdown-cell.filled {
+            background: black;
+        }
+
+
+        /* =========================
+           DESCRIPTION
+           ========================= */
+
+        .explanation {
+
+            max-width: 750px;
+
+            margin: 50px auto 0 auto;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #ddd;
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 700px) {
+
+            body {
+                padding: 25px 15px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .controls {
+                justify-content: flex-start;
+            }
+
+            .draft {
+                gap: 25px;
+            }
+
+            .cell {
+                width: 14px;
+                height: 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <h1>
+        Interactive Weaving Draft Generator
+    </h1>
+
+
+    <p class="intro">
+
+        Experiment with different loom configurations.
+        Choose the number of frames, pedals, warps and
+        weft cycles, then generate a random,
+        loom-reproducible weaving draft.
+
+    </p>
+
+
+    <!-- =========================
+         CONTROLS
+         ========================= -->
+
+    <div class="controls">
+
+        <div class="control">
+
+            <label for="frames">
+                Frames
+            </label>
+
+            <input
+                type="number"
+                id="frames"
+                min="1"
+                max="8"
+                value="2">
+
+        </div>
+
+
+        <div class="control">
+
+            <label for="pedals">
+                Pedals
+            </label>
+
+            <input
+                type="number"
+                id="pedals"
+                min="1"
+                max="8"
+                value="2">
+
+        </div>
+
+
+        <div class="control">
+
+            <label for="warps">
+                Warps
+            </label>
+
+            <input
+                type="number"
+                id="warps"
+                min="2"
+                max="32"
+                value="16">
+
+        </div>
+
+
+        <div class="control">
+
+            <label for="wefts">
+                Weft cycles
+            </label>
+
+            <input
+                type="number"
+                id="wefts"
+                min="2"
+                max="32"
+                value="16">
+
+        </div>
+
+
+        <button onclick="generateDraft()">
+            Generate Random Draft
+        </button>
+
+
+        <button onclick="generateExample()">
+            Reset to Example
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         GENERATED DRAFT
+         ========================= -->
+
+    <div id="draft-output"></div>
+
+
+    <!-- =========================
+         EXPLANATION
+         ========================= -->
+
+    <div class="explanation">
+
+        <p>
+            Each generated draft contains four binary matrices:
+            threading, tie-up, treadling and drawdown.
+            The drawdown is generated using
+        </p>
+
+        <p style="text-align:center; font-size:20px;">
+            <strong>
+                Drawdown =
+                Treadling × Tie-up<sup>T</sup> × Threading
+            </strong>
+        </p>
+
+        <p>
+            The generator also imposes basic physical constraints
+            of the loom. For example, each warp thread is assigned
+            to exactly one frame.
+        </p>
+
+    </div>
+
+
+</div>
+
+
+<script>
+
+
+// =========================================================
+// RANDOM INTEGER
+// =========================================================
+
+function randomInteger(max) {
+
+    return Math.floor(
+        Math.random() * max
+    );
+
+}
+
+
+// =========================================================
+// CREATE EMPTY MATRIX
+// =========================================================
+
+function createMatrix(rows, columns) {
+
+    return Array.from(
+        { length: rows },
+        () => Array(columns).fill(0)
+    );
+
+}
+
+
+// =========================================================
+// RANDOM THREADING
+//
+// Constraint:
+// Each warp is attached to exactly ONE frame.
+// =========================================================
+
+function generateThreading(frames, warps) {
+
+    const threading =
+        createMatrix(frames, warps);
+
+
+    for (let warp = 0; warp < warps; warp++) {
+
+        const frame =
+            randomInteger(frames);
+
+        threading[frame][warp] = 1;
+
+    }
+
+    return threading;
+
+}
+
+
+// =========================================================
+// RANDOM TIE-UP
+//
+// Each pedal must be connected to at least one frame.
+// A pedal may connect to multiple frames.
+// =========================================================
+
+function generateTieup(frames, pedals) {
+
+    const tieup =
+        createMatrix(frames, pedals);
+
+
+    for (let pedal = 0; pedal < pedals; pedal++) {
+
+        // Make sure every pedal controls
+        // at least one frame.
+
+        const frame =
+            randomInteger(frames);
+
+        tieup[frame][pedal] = 1;
+
+
+        // Randomly add additional frames.
+
+        for (let frame = 0; frame < frames; frame++) {
+
+            if (Math.random() < 0.35) {
+
+                tieup[frame][pedal] = 1;
+
+            }
+
+        }
+
+    }
+
+    return tieup;
+
+}
+
+
+// =========================================================
+// RANDOM TREADLING
+//
+// Each weft cycle uses at least one pedal.
+// =========================================================
+
+function generateTreadling(wefts, pedals) {
+
+    const treadling =
+        createMatrix(wefts, pedals);
+
+
+    for (let weft = 0; weft < wefts; weft++) {
+
+        // Every weft cycle gets
+        // at least one pedal.
+
+        const pedal =
+            randomInteger(pedals);
+
+        treadling[weft][pedal] = 1;
+
+
+        // Occasionally allow multiple pedals.
+
+        for (let p = 0; p < pedals; p++) {
+
+            if (Math.random() < 0.15) {
+
+                treadling[weft][p] = 1;
+
+            }
+
+        }
+
+    }
+
+    return treadling;
+
+}
+
+
+// =========================================================
+// MATRIX MULTIPLICATION
+// =========================================================
+
+function multiply(A, B) {
+
+    const rowsA = A.length;
+    const colsA = A[0].length;
+
+    const rowsB = B.length;
+    const colsB = B[0].length;
+
+
+    if (colsA !== rowsB) {
+
+        throw new Error(
+            "Matrix dimensions do not match."
+        );
+
+    }
+
+
+    const result =
+        createMatrix(rowsA, colsB);
+
+
+    for (let i = 0; i < rowsA; i++) {
+
+        for (let j = 0; j < colsB; j++) {
+
+            let sum = 0;
+
+
+            for (let k = 0; k < colsA; k++) {
+
+                sum +=
+                    A[i][k] *
+                    B[k][j];
+
+            }
+
+
+            result[i][j] = sum;
+
+        }
+
+    }
+
+
+    return result;
+
+}
+
+
+// =========================================================
+// TRANSPOSE
+// =========================================================
+
+function transpose(matrix) {
+
+    return matrix[0].map(
+        (_, column) =>
+            matrix.map(
+                row => row[column]
+            )
+    );
+
+}
+
+
+// =========================================================
+// GENERATE COMPLETE DRAFT
+// =========================================================
+
+function createDraft(
+    frames,
+    pedals,
+    warps,
+    wefts
+) {
+
+    const threading =
+        generateThreading(
+            frames,
+            warps
+        );
+
+
+    const tieup =
+        generateTieup(
+            frames,
+            pedals
+        );
+
+
+    const treadling =
+        generateTreadling(
+            wefts,
+            pedals
+        );
+
+
+    // -------------------------------------------------
+    // Matrix multiplication
+    //
+    // Treadling × Tie-upᵀ × Threading
+    // -------------------------------------------------
+
+    const tieupT =
+        transpose(tieup);
+
+
+    const first =
+        multiply(
+            treadling,
+            tieupT
+        );
+
+
+    const drawdownRaw =
+        multiply(
+            first,
+            threading
+        );
+
+
+    // Convert values to binary
+    // for graphical drawdown.
+
+    const drawdown =
+        drawdownRaw.map(
+            row =>
+                row.map(
+                    value =>
+                        value > 0 ? 1 : 0
+                )
+        );
+
+
+    return {
+        threading,
+        tieup,
+        treadling,
+        drawdown
+    };
+
+}
+
+
+// =========================================================
+// DRAW MATRIX
+// =========================================================
+
+function drawMatrix(
+    matrix,
+    title,
+    cellClass
+) {
+
+    let html = `
+
+        <div class="matrix-container">
+
+            <h3>
+                ${title}
+            </h3>
+
+            <div
+                class="matrix"
+                style="
+                    grid-template-columns:
+                    repeat(
+                        ${matrix[0].length},
+                        18px
+                    );
+                "
+            >
+
+    `;
+
+
+    for (let row of matrix) {
+
+        for (let value of row) {
+
+            html += `
+
+                <div
+                    class="
+                        cell
+                        ${value === 1 ? "filled" : ""}
+                        ${cellClass}
+                    ">
+                </div>
+
+            `;
+
+        }
+
+    }
+
+
+    html += `
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    return html;
+
+}
+
+
+// =========================================================
+// DISPLAY DRAFT
+// =========================================================
+
+function displayDraft(draft) {
+
+    const output =
+        document.getElementById(
+            "draft-output"
+        );
+
+
+    output.innerHTML = `
+
+        <div class="draft">
+
+            ${drawMatrix(
+                draft.tieup,
+                "Tie-up",
+                "tieup-cell"
+            )}
+
+            ${drawMatrix(
+                draft.threading,
+                "Threading",
+                "threading-cell"
+            )}
+
+            ${drawMatrix(
+                draft.treadling,
+                "Treadling",
+                "treadling-cell"
+            )}
+
+            ${drawMatrix(
+                draft.drawdown,
+                "Drawdown",
+                "drawdown-cell"
+            )}
+
+        </div>
+
+    `;
+
+}
+
+
+// =========================================================
+// GENERATE RANDOM DRAFT
+// =========================================================
+
+function generateDraft() {
+
+    const frames =
+        parseInt(
+            document.getElementById(
+                "frames"
+            ).value
+        );
+
+
+    const pedals =
+        parseInt(
+            document.getElementById(
+                "pedals"
+            ).value
+        );
+
+
+    const warps =
+        parseInt(
+            document.getElementById(
+                "warps"
+            ).value
+        );
+
+
+    const wefts =
+        parseInt(
+            document.getElementById(
+                "wefts"
+            ).value
+        );
+
+
+    // Basic validation
+
+    if (
+        frames < 1 ||
+        pedals < 1 ||
+        warps < 2 ||
+        wefts < 2
+    ) {
+
+        alert(
+            "Please enter valid loom dimensions."
+        );
+
+        return;
+
+    }
+
+
+    const draft =
+        createDraft(
+            frames,
+            pedals,
+            warps,
+            wefts
+        );
+
+
+    displayDraft(draft);
+
+}
+
+
+// =========================================================
+// RESET TO SIMPLE EXAMPLE
+// =========================================================
+
+function generateExample() {
+
+    document.getElementById(
+        "frames"
+    ).value = 2;
+
+
+    document.getElementById(
+        "pedals"
+    ).value = 2;
+
+
+    document.getElementById(
+        "warps"
+    ).value = 16;
+
+
+    document.getElementById(
+        "wefts"
+    ).value = 16;
+
+
+    generateDraft();
+
+}
+
+
+// =========================================================
+// INITIAL DRAFT
+// =========================================================
+
+generateDraft();
+
+
+</script>
+
+
+</body>
+
+</html>
